@@ -24,6 +24,15 @@
         rt += "</ul>";
         return rt;
     }
+    
+    // 定位设置 
+    function setPosi($el, x, y) {
+        $el.css({
+            left: x || 0,
+            top: y || 0
+        });
+    }
+    
 
     jQuery.fn.extend({
         calendar: function (options) {
@@ -53,7 +62,8 @@
                 );
             var $cmain = $("<div class='main'></div>");
             var $cFoot = $("<div class='foot'></div>");
-
+            
+            // 填充日历格子，数量可控 
             var cellStr = cellBuilder(opts.cellSize);
             $cmain.html(cellStr);
 
@@ -62,6 +72,8 @@
             $cWrap.append($cHead, $cmain, $cFoot);
 
             $cWrap.appendTo("body");
+            var offset = $(this).offset();
+            setPosi($cWrap, opts.x || offset.left, opts.y || offset.top + $(this).outerHeight());
         }
     });
 

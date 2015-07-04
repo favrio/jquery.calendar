@@ -30,6 +30,9 @@ input {
 
 /*CALENDAR*/
 .calendar {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 455px;
 	min-height: 340px;
 	background: #F7F7F7;
