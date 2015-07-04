@@ -8,9 +8,14 @@
     }
 })(window, function (root) {
 
-    jQuery.fn.extend({
-        calendar: function () {
+    var defaults = {
+        
+    };
 
+    jQuery.fn.extend({
+        calendar: function (options) {
+            var opts = $.extend({}, defaults, options);
+            console.log(opts);
         }
     });
 

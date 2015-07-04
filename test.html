@@ -10,13 +10,20 @@
 			<div class="inner">
 				<div class="row">
 					<div class="col">
-						<label for="date-picker">选择日期：</label>
+						<label for="date-picker-01">选择日期：</label>
 						<input id="date-picker" type="text" placeholder="请选择出行日期">
 					</div>
 				</div>
 			</div>
 		</div>
+		<script src="jquery.js"></script>
 		<script src="jquery.calendar.js"></script>
+		<script>
+			var $datePicker01 = $("#date-picker-01");
+			$datePicker01.calendar({
+				start: "now"
+			});
+		</script>
 	</body>
 
 </html>
