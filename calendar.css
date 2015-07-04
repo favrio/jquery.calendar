@@ -4,18 +4,17 @@
 }
 body {
 	font-size: 12px;
-	font-family: "Microsoft Yahei";
 	line-height: 1;
 	background: cornflowerblue;
 }
 
 .wrap-box {
-	width: 300px;
-	height: 200px;
+	width: 600px;
+	height: 400px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin: -100px 0 0 -150px;
+	margin: -200px 0 0 -300px;
 	background: #e3e3e3;
 	border-radius: 2px;
 }
@@ -27,4 +26,24 @@ input {
 	line-height: 1;
 	padding: 10px 20px;
 	border-radius: 2px;
+}
+
+/*CALENDAR*/
+.calendar {
+	width: 460px;
+	height: 340px;
+	background: #F7F7F7;
+}
+.head .primary {
+	color: #FFF;
+	font-size: 20px;
+	background: #8FCEFE;
+	font-family: "Microsoft Yahei";
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+.head .secondary {
+	color: #666666;
+	background: #F7F7F7;
 }
