@@ -4,5 +4,27 @@
 }
 body {
 	font-size: 12px;
+	font-family: "Microsoft Yahei";
 	line-height: 1;
+	background: cornflowerblue;
+}
+
+.wrap-box {
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -100px 0 0 -150px;
+	background: #e3e3e3;
+	border-radius: 2px;
+}
+.inner {
+	padding: 10px;
+}
+input {
+	border: 1px solid cornflowerblue;
+	line-height: 1;
+	padding: 10px 20px;
+	border-radius: 2px;
 }

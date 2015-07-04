@@ -10,7 +10,7 @@
 
     jQuery.fn.extend({
         calendar: function () {
-            
+
         }
     });
 
