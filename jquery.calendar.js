@@ -21,7 +21,7 @@
 		var rt = "<ul>",
 			i;
 		for (i = 0; i < size; i++) {
-			rt += "<li></li>";
+			rt += "<li" + (((i + 1) % 7) ? "" : " class='last'") + "></li>";
 		}
 		rt += "</ul>";
 		return rt;
