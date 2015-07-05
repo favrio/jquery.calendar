@@ -86,3 +86,11 @@ input {
 .calendar .main .last {
 	border-right: none;
 }
+.calendar .prev {
+	float: left;
+	padding: 0 10px;
+}
+.calendar .next {
+	float: right;
+	padding: 0 10px;
+}

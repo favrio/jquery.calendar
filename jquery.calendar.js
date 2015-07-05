@@ -152,8 +152,10 @@
 			$cHead = $(
 				"<div class='head'>\
 					<div class='primary'>\
+						<a class='prev ion-arrow-left-b'></a>\
 						<span class='year'>2015</span>年\
 						<span class='month'>05</span>月\
+						<a class='next ion-arrow-right-b'></a>\
 					</div>\
 					<div class='secondary'>\
 						<ul class='weeks'>\
