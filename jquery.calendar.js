@@ -136,6 +136,10 @@
 
 	}
 
+	function putOut($el, year, month, day) {
+		$el.val(year + "-" + getTwoBit(month) + "-" + getTwoBit(day));
+	}
+
 
 	jQuery.fn.extend({
 		calendar: function(options) {
@@ -199,7 +203,11 @@
 			});
 			$cWrap.on("click", ".day", function() {
 				var day = $(this).data("day");
-				console.log(day);
+				if(!day) {
+					return false;
+				}
+				putOut($input, 2015, 05, day);
+				handles.hide();
 			});
 
 		}
