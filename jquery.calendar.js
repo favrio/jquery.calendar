@@ -47,9 +47,12 @@
 	 */
 	function cellBuilder(size) {
 		var rt = "<ul>",
-			i;
+			i,
+			isLast;
 		for (i = 0; i < size; i++) {
-			rt += "<li" + (((i + 1) % 7) ? "" : " class='last'") + "></li>";
+			isLast = (i + 1) % 7;
+			isLastClass = isLast ? "'" : " last'";
+			rt += "<li class='day" + isLastClass + "></li>";
 		}
 		rt += "</ul>";
 		return rt;
@@ -122,12 +125,12 @@
 		var days = calculateDays(year, month);
 		var monthStartDay = new Date(year + "/" + month + "/01");
 		var startDay = monthStartDay.getDay();
-		console.log(startDay);
 		var $lis = $el.find("li:gt(" + (startDay - 1) + ")"); // gt匹配所有大于给定索引值的元素，所以-1
-		console.log($lis);
 		$lis.each(function(index) {
 			if (index < days) {
-				$(this).text(index + 1);
+				$(this).text(index + 1).data("day", index + 1);
+			} else {
+				$(this).text("").removeData("day");
 			}
 		});
 
@@ -193,6 +196,10 @@
 				if (!$(ev.target).closest("." + opts.wrapClass).length) {
 					handles.hide();
 				}
+			});
+			$cWrap.on("click", ".day", function() {
+				var day = $(this).data("day");
+				console.log(day);
 			});
 
 		}
