@@ -15,14 +15,30 @@
 		wrapClass: "calendar"
 	};
 
-	// 元素引用
+	// 元素引用，期望多个日历公用一套Dom
 	var $cWrap,
 		$cHead,
 		$cmain,
 		$cFoot;
 
+	// 月份天数索引表
+	var monthsIndex = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 	// 工具函数
+	
+	/**
+	 * 根据月份和年计算当月天数
+	 * @param  {Number} year  年
+	 * @param  {Number} month 月，从0开始
+	 * @return {Number}       该年该月的天数
+	 */
+	function calculateDays(year, month) {
+		var days = monthsIndex[month];
+		if(month === 1 && isLeapYear(year)) {
+			days = 29;
+		}
+		return days;
+	}
 
 	/**
 	 * 日历格子生成器
