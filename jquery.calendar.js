@@ -195,9 +195,9 @@
 
 
 			// 事件绑定
-			$input.on("click focus", handles.show);
+			$input.on("focus", handles.show);
 			$(document).on("click", function(ev) {
-				if (!$(ev.target).closest("." + opts.wrapClass).length) {
+				if (!$(ev.target).closest("." + opts.wrapClass).length && $(ev.target)[0] !== $input[0]) {
 					handles.hide();
 				}
 			});
