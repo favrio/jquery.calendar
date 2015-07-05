@@ -27,6 +27,9 @@ input {
 	padding: 10px 20px;
 	border-radius: 2px;
 }
+.row {
+	margin-bottom: 20px;
+}
 
 /*CALENDAR*/
 .calendar {
@@ -69,9 +72,12 @@ input {
 	min-height: 260px;
 }
 .calendar .main li {
+	font-size: 14px;
+	color: #999;
 	float: left;
-	width: 64px;
-	height: 45px;
+	width: 56px;
+	height: 37px;
+	padding: 4px;
 	background: #FFF;
 	border-bottom: 1px solid #ececec;
 	border-right: 1px solid #ececec;

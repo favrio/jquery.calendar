@@ -25,7 +25,7 @@
 	var monthsIndex = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 	// 工具函数
-	
+
 	/**
 	 * 根据月份和年计算当月天数
 	 * @param  {Number} year  年
@@ -34,7 +34,7 @@
 	 */
 	function calculateDays(year, month) {
 		var days = monthsIndex[month];
-		if(month === 1 && isLeapYear(year)) {
+		if (month === 1 && isLeapYear(year)) {
 			days = 29;
 		}
 		return days;
@@ -118,6 +118,21 @@
 		return new Date(str);
 	}
 
+	function fillCell($el, year, month) {
+		var days = calculateDays(year, month);
+		var monthStartDay = new Date(year + "/" + month + "/01");
+		var startDay = monthStartDay.getDay();
+		console.log(startDay);
+		var $lis = $el.find("li:gt(" + (startDay - 1) + ")"); // gt匹配所有大于给定索引值的元素，所以-1
+		console.log($lis);
+		$lis.each(function(index) {
+			if (index < days) {
+				$(this).text(index + 1);
+			}
+		});
+
+	}
+
 
 	jQuery.fn.extend({
 		calendar: function(options) {
@@ -156,6 +171,7 @@
 			var handles = {
 				show: function(ev) {
 					$cWrap.fadeIn(200);
+					fillCell($cmain, 2015, 7);
 					return false;
 				},
 				hide: function() {
@@ -168,6 +184,8 @@
 			$cWrap.append($cHead, $cmain, $cFoot).hide().appendTo("body");
 			// 设置日历的定位
 			setPosi($cWrap, opts.x || offset.left, opts.y || offset.top + $input.outerHeight());
+
+
 
 			// 事件绑定
 			$input.on("click focus", handles.show);
