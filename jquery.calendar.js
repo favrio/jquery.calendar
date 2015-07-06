@@ -128,7 +128,6 @@
 	 * @param  {Number} month 月
 	 */
 	function fillCell($el, year, month) {
-		console.log("do fill");
 		var days = calculateDays(year, month);
 		var monthStartDay = new Date(year, month, 1);
 		var startDay = monthStartDay.getDay();
@@ -149,7 +148,7 @@
 	 * @param  {Number} day   日
 	 */
 	function putOut($el, year, month, day) {
-		$el.val(year + "-" + getTwoBit(month) + "-" + getTwoBit(day));
+		$el.val(year + "-" + getTwoBit(month + 1) + "-" + getTwoBit(day));
 	}
 
 	/**
@@ -158,14 +157,13 @@
 	 * @param  {Number} year  更新成该年
 	 * @param  {Number} month 更新成该月
 	 */
-	function update($el, year, month) {
-		console.log("do update");
-
+	function update($input, $el, year, month) {
 		var $year = $el.find(".primary .year"),
 			$month = $el.find(".primary .month");
 
-		$year.text(year).data("year", year);
-		$month.text(getTwoBit(month + 1)).data("month", month);
+		$year.text(year);
+		$month.text(getTwoBit(month + 1));
+		$input.data("year", year).data("month", month);
 	}
 
 
@@ -213,7 +211,7 @@
 						year = now.getFullYear(),
 						month = now.getMonth();
 					$cWrap.fadeIn(200);
-					update($cWrap, year, month);
+					update($input, $cWrap, year, month);
 					fillCell($cmain, year, month);
 					return false;
 				},
@@ -222,8 +220,8 @@
 					return false;
 				},
 				next: function() {
-					var lastYear = +$year.data("year"),
-						lastMonth = +$month.data("month");
+					var lastYear = +$input.data("year"),
+						lastMonth = +$input.data("month");
 
 					var year, month;
 
@@ -234,13 +232,13 @@
 						year = lastYear;
 						month = lastMonth + 1;
 					}
-					update($cWrap, year, month);
+					update($input, $cWrap, year, month);
 					fillCell($cmain, year, month);
 
 				},
 				prev: function() {
-					var lastYear = +$year.data("year"),
-						lastMonth = +$month.data("month");
+					var lastYear = +$input.data("year"),
+						lastMonth = +$input.data("month");
 
 					var year, month;
 
@@ -251,7 +249,7 @@
 						year = lastYear;
 						month = lastMonth - 1;
 					}
-					update($cWrap, year, month);
+					update($input, $cWrap, year, month);
 					fillCell($cmain, year, month);
 				}
 			}
@@ -271,11 +269,14 @@
 				}
 			});
 			$cWrap.on("click", ".day", function() {
-				var day = $(this).data("day");
+				var day = +$(this).data("day");
+				var year = +$input.data("year");
+				var month = +$input.data("month");
+
 				if (!day) {
 					return false;
 				}
-				putOut($input, 2015, 05, day);
+				putOut($input, year, month, day);
 				handles.hide();
 			});
 
