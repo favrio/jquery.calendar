@@ -121,6 +121,12 @@
 		return new Date(str);
 	}
 
+	/**
+	 * 填充日历
+	 * @param  {jq Object} $el   待填充格子的父级元素
+	 * @param  {Number} year  年
+	 * @param  {Number} month 月
+	 */
 	function fillCell($el, year, month) {
 		console.log("do fill");
 		var days = calculateDays(year, month);
@@ -135,10 +141,23 @@
 
 	}
 
+	/**
+	 * 格式化输出
+	 * @param  {jq Object} $el   填充格式化后的结果的元素，一般为Input
+	 * @param  {Number} year  年
+	 * @param  {Number} month 月
+	 * @param  {Number} day   日
+	 */
 	function putOut($el, year, month, day) {
 		$el.val(year + "-" + getTwoBit(month) + "-" + getTwoBit(day));
 	}
 
+	/**
+	 * 界面更新
+	 * @param  {jq Object} $el   需要更新的界面jq对象
+	 * @param  {Number} year  更新成该年
+	 * @param  {Number} month 更新成该月
+	 */
 	function update($el, year, month) {
 		console.log("do update");
 
