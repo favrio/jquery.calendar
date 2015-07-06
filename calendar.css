@@ -54,6 +54,9 @@ input {
 	line-height: 40px;
 	text-align: center;
 }
+.primary .next, .primary .prev {
+	color: #FFF;
+}
 .head .secondary {
 	color: #666666;
 	background: #F7F7F7;

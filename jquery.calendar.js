@@ -122,12 +122,13 @@
 	}
 
 	function fillCell($el, year, month) {
+		console.log("do fill");
 		var days = calculateDays(year, month);
 		var monthStartDay = new Date(year, month, 1);
 		var startDay = monthStartDay.getDay();
 
 		var $lis = $el.find("li");
-		$lis.removeData("day");
+		$lis.removeData("day").text("");
 		for (var i = 0; i < days; i++) {
 			$lis.eq(i + startDay).data("day", i + 1).text(i + 1);
 		}
@@ -136,6 +137,16 @@
 
 	function putOut($el, year, month, day) {
 		$el.val(year + "-" + getTwoBit(month) + "-" + getTwoBit(day));
+	}
+
+	function update($el, year, month) {
+		console.log("do update");
+
+		var $year = $el.find(".primary .year"),
+			$month = $el.find(".primary .month");
+
+		$year.text(year).data("year", year);
+		$month.text(getTwoBit(month + 1)).data("month", month);
 	}
 
 
@@ -150,10 +161,10 @@
 			$cHead = $(
 				"<div class='head'>\
 					<div class='primary'>\
-						<a class='prev ion-arrow-left-b'></a>\
+						<a href='javascript:;' class='prev ion-arrow-left-b'></a>\
 						<span class='year'>2015</span>年\
 						<span class='month'>05</span>月\
-						<a class='next ion-arrow-right-b'></a>\
+						<a href='javascript:;' class='next ion-arrow-right-b'></a>\
 					</div>\
 					<div class='secondary'>\
 						<ul class='weeks'>\
@@ -170,6 +181,8 @@
 			);
 			$cmain = $("<div class='main'></div>");
 			$cFoot = $("<div class='foot'></div>");
+			var $year = $cHead.find(".primary .year"),
+				$month = $cHead.find(".primary .month");
 
 			// 填充日历格子，数量可控 
 			var cellStr = cellBuilder(opts.cellSize);
@@ -177,13 +190,50 @@
 
 			var handles = {
 				show: function(ev) {
+					var now = new Date(),
+						year = now.getFullYear(),
+						month = now.getMonth();
 					$cWrap.fadeIn(200);
-					fillCell($cmain, 2015, 6);
+					update($cWrap, year, month);
+					fillCell($cmain, year, month);
 					return false;
 				},
 				hide: function() {
 					$cWrap.fadeOut(200);
 					return false;
+				},
+				next: function() {
+					var lastYear = +$year.data("year"),
+						lastMonth = +$month.data("month");
+
+					var year, month;
+
+					if (lastMonth >= 11) {
+						year = lastYear + 1;
+						month = 0;
+					} else {
+						year = lastYear;
+						month = lastMonth + 1;
+					}
+					update($cWrap, year, month);
+					fillCell($cmain, year, month);
+
+				},
+				prev: function() {
+					var lastYear = +$year.data("year"),
+						lastMonth = +$month.data("month");
+
+					var year, month;
+
+					if (lastMonth <= 0) {
+						year = lastYear - 1;
+						month = 11;
+					} else {
+						year = lastYear;
+						month = lastMonth - 1;
+					}
+					update($cWrap, year, month);
+					fillCell($cmain, year, month);
 				}
 			}
 
@@ -209,6 +259,9 @@
 				putOut($input, 2015, 05, day);
 				handles.hide();
 			});
+
+			$cHead.on("click", ".prev", handles.prev);
+			$cHead.on("click", ".next", handles.next);
 
 		}
 	});
