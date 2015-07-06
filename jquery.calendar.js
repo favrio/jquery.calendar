@@ -123,16 +123,14 @@
 
 	function fillCell($el, year, month) {
 		var days = calculateDays(year, month);
-		var monthStartDay = new Date(year + "/" + month + "/01");
+		var monthStartDay = new Date(year, month, 1);
 		var startDay = monthStartDay.getDay();
-		var $lis = $el.find("li:gt(" + (startDay - 1) + ")"); // gt匹配所有大于给定索引值的元素，所以-1
-		$lis.each(function(index) {
-			if (index < days) {
-				$(this).text(index + 1).data("day", index + 1);
-			} else {
-				$(this).text("").removeData("day");
-			}
-		});
+
+		var $lis = $el.find("li");
+		$lis.removeData("day");
+		for (var i = 0; i < days; i++) {
+			$lis.eq(i + startDay).data("day", i + 1).text(i + 1);
+		}
 
 	}
 
@@ -180,7 +178,7 @@
 			var handles = {
 				show: function(ev) {
 					$cWrap.fadeIn(200);
-					fillCell($cmain, 2015, 7);
+					fillCell($cmain, 2015, 6);
 					return false;
 				},
 				hide: function() {
@@ -205,7 +203,7 @@
 			});
 			$cWrap.on("click", ".day", function() {
 				var day = $(this).data("day");
-				if(!day) {
+				if (!day) {
 					return false;
 				}
 				putOut($input, 2015, 05, day);
